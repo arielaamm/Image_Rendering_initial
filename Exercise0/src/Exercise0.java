@@ -15,14 +15,29 @@ abstract class Employee {
         setLastName(lastName);
     }
 
+    
+    /** 
+     * @param firstName
+     * @return 
+     */
     private void setFirstName(String firstName) {
         this.firstName = firstName;
     } // set firstName
 
+    
+    /** 
+     * @param lastName
+     * @return 
+     */
     private void setLastName(String lastName) {
         this.lastName = lastName;
     } // set lastName
 
+    
+    /** 
+     * @param Id
+     * @return 
+     */
     private void setId(int Id) {
         if (Id < 0) {
             throw new IllegalArgumentException("the Id must be positive");
@@ -30,23 +45,44 @@ abstract class Employee {
         this.Id = Id;
     } // set Id
 
+    
+    /** 
+     * @return 
+     */
     private String getFirstName() {
         return firstName;
     } // returns the firstName
 
+    
+    /** 
+     * @return 
+     */
     private String getLastName() {
         return lastName;
     } // returns the lastName
 
+    
+    /** 
+     * @return 
+     */
     private int getId() {
         return Id;
     } // returns the Id
 
+    
+    /** 
+     * @return 
+     */
     @Override
     public String toString() {
         return "first name: " + getFirstName() + ", last name: " + getLastName() + ", ID: " + getId();
     }
 
+    
+    /** 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         return (((Employee) obj).getId() == getId() && ((Employee) obj).getFirstName() == getFirstName()
