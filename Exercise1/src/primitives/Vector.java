@@ -57,7 +57,7 @@ public class Vector extends Point {
     }
 
     
-    // TODO:
+    // TODO: להשלים פוקנציות נמצא בקבצים שמודל
     // + crossProduct(Vector): Vector
     // + dotProduct(Vector): double
 

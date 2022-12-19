@@ -1,6 +1,6 @@
 package primitives;
 
-// TODO: 
+// TODO: להשלים פוקנציות נמצא בקבצים שמודל
 // + subtract(Double3):Double3
 // + product(Double3):Double3
 // + reduce(double):Double3
