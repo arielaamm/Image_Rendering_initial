@@ -15,6 +15,14 @@ public class Vector extends Point {
         }
     }
 
+
+    public Vector(int i, int j, int k) {
+        super(i, j, k);
+        if (i == 0 && j == 0 && k == 0) {
+            throw new IllegalArgumentException("the vector is the zero vector");
+        }
+    }
+
     /**
      * @param v
      * @return add {@link Vector} to other vector
