@@ -28,17 +28,33 @@ public class Point {
         return new Vector(this.xyz.subtract(p.xyz));
     }
     
+    
+    /** 
+     * @param x
+     * @param y
+     * @return squared distance between x and y
+     */
     public double distanceSquared(Point x,Point y) {
         return (x.xyz.d1 - y.xyz.d1) * (x.xyz.d1 - y.xyz.d1) +
                (x.xyz.d2 - y.xyz.d2) * (x.xyz.d2 - y.xyz.d2) + 
                (x.xyz.d3 - y.xyz.d3) * (x.xyz.d3 - y.xyz.d3);
     }
 
+    
+    /** 
+     * @param p
+     * @return distance between two points
+     */
     public double distance(Point p)
     {
         return Math.sqrt(distanceSquared(this, p));
     }
 
+    
+    /** 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -49,6 +65,10 @@ public class Point {
     }
 
     
+    
+    /** 
+     * @return 
+     */
     @Override
     public String toString() {
         return xyz.toString();

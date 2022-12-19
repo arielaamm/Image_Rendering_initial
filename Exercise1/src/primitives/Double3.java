@@ -1,8 +1,8 @@
 package primitives;
+
 // TODO: 
 // + subtract(Double3):Double3
 // + product(Double3):Double3
-// + scale(double):Double3
 // + reduce(double):Double3
 public class Double3 {
     protected static final Double3 ZERO = new Double3(0, 0, 0);
@@ -15,8 +15,7 @@ public class Double3 {
         this.d3 = d3;
     }
 
-    
-    /** 
+    /**
      * @param xyz
      * @return add {@link Double3}
      */
@@ -24,8 +23,7 @@ public class Double3 {
         return new Double3(d1 + xyz.d1, d2 + xyz.d2, d3 + xyz.d3);
     }
 
-    
-    /** 
+    /**
      * @param xyz
      * @return subtract {@link Double3}
      */
@@ -33,14 +31,18 @@ public class Double3 {
         return new Double3(d1 - xyz.d1, d2 - xyz.d2, d3 - xyz.d3);
     }
 
-    public Double3 scale(double d)
-    {
-        return new Double3(d1*d, d2*d, d3*d);
-    }
     
     /** 
-     * @param obj
+     * @param d
      * @return 
+     */
+    public Double3 scale(double d) {
+        return new Double3(d1 * d, d2 * d, d3 * d);
+    }
+
+    /**
+     * @param obj
+     * @return
      */
     @Override
     public boolean equals(Object obj) {
@@ -56,14 +58,12 @@ public class Double3 {
                 Util.isZero(d3 - other.d3);
     }
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     @Override
     public String toString() {
         return "(" + d1 + "," + d2 + "," + d3 + ")";
     }
-
 
 }

@@ -17,28 +17,46 @@ public class Vector extends Point {
 
     /**
      * @param v
-     * @return add {@link Vector}
+     * @return add {@link Vector} to other vector
      */
     public Vector add(Vector v) {
         return new Vector(super.add(v).xyz);
     }
 
-    public Vector scale(double d) {
-        return new Vector(xyz.scale(d));
+    
+    /** 
+     * @param multiplier
+     * @return thw {@link Vector} time multiplier
+     */
+    public Vector scale(double multiplier) {
+        return new Vector(xyz.scale(multiplier));
     }
 
+    
+    /** 
+     * @return squared length of the Vector
+     */
     public double lengthSquared() {
         return distanceSquared(new Point(Double3.ZERO), new Point(xyz));
     }
 
+    
+    /** 
+     * @return length of the Vector
+     */
     public double length() {
         return Math.sqrt(lengthSquared());
     }
 
+    
+    /** 
+     * @return normalize the vector
+     */
     public Vector normalize() {
         return new Vector(xyz.scale(1 / length()));
     }
 
+    
     // TODO:
     // + crossProduct(Vector): Vector
     // + dotProduct(Vector): double
@@ -51,6 +69,8 @@ public class Vector extends Point {
             return false;
         return super.equals(obj);
     }
+
+    
 
     @Override
     public String toString() {

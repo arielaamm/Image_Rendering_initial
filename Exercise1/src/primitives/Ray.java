@@ -10,20 +10,25 @@ public class Ray {
 
     
     /** 
-     * @return P0
+     * @return P0 {@link Point}
      */ 
     public Point getP0(){
         return p0;
     }
     
     /** 
-     * @return Dir
+     * @return Dir {@link Vector}
      */
     public Vector getDir(){
         return dir;
     }
 
     
+    
+    /** 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -34,6 +39,10 @@ public class Ray {
     }
 
     
+    
+    /** 
+     * @return 
+     */
     @Override
     public String toString() {
         return p0.toString() +", " + dir.toString();
