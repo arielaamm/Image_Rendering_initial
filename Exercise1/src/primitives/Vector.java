@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 public class Vector extends Point {
     Vector(Double3 xyz) {
         super(xyz);
@@ -15,7 +17,6 @@ public class Vector extends Point {
         }
     }
 
-
     public Vector(int i, int j, int k) {
         super(i, j, k);
         if (i == 0 && j == 0 && k == 0) {
@@ -28,8 +29,7 @@ public class Vector extends Point {
      * @return add {@link Vector} to other vector
      */
     public Vector add(Vector v) {
-        if(xyz.equals(v.xyz))
-        {
+        if (xyz.equals(v.xyz)) {
             throw new IllegalArgumentException("they the same vector");
         }
         return new Vector(super.add(v).xyz);
@@ -61,7 +61,7 @@ public class Vector extends Point {
      * @return normalize the vector
      */
     public Vector normalize() {
-        return new Vector(xyz.scale(1 / length()));
+        return new Vector(xyz.reduce(length()));
     }
 
     /**
@@ -71,20 +71,25 @@ public class Vector extends Point {
         return xyz.product(v.xyz).d1 + xyz.product(v.xyz).d2 + xyz.product(v.xyz).d3;
     }
 
-    public Vector crossProduct(Vector v)
-    {
-        Vector temp =  new Vector(
-            (xyz.d2 * v.xyz.d3) - (xyz.d3 * v.xyz.d2),
-            (xyz.d3 * v.xyz.d1) - (xyz.d1 * v.xyz.d3),
-            (xyz.d1 * v.xyz.d2) - (xyz.d2 * v.xyz.d1)
-        );
-        if (temp.xyz.equals(Double3.ZERO))
-        {
+    public Vector crossProduct(Vector v) {
+        Vector temp = new Vector(
+                (xyz.d2 * v.xyz.d3) - (xyz.d3 * v.xyz.d2),
+                (xyz.d3 * v.xyz.d1) - (xyz.d1 * v.xyz.d3),
+                (xyz.d1 * v.xyz.d2) - (xyz.d2 * v.xyz.d1));
+        if (temp.xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("vectors are parallel");
         }
         return temp;
     }
 
+    public static boolean isOnSamePlane(Point... vertices) {
+        return List.of(vertices).stream().allMatch(
+                v -> new Point(
+                        (vertices[0].xyz.d2 * v.xyz.d3) - (vertices[0].xyz.d3 * v.xyz.d2),
+                        (vertices[0].xyz.d3 * v.xyz.d1) - (vertices[0].xyz.d1 * v.xyz.d3),
+                        (vertices[0].xyz.d1 * v.xyz.d2) - (vertices[0].xyz.d2 * v.xyz.d1))
+                        .equals(new Point(Double3.ZERO)));
+    }
 
     @Override
     public boolean equals(Object obj) {

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import geometries.Sphere;
 import primitives.Point;
+import primitives.Vector;
 
 public class SphereTest {
     Sphere s = new Sphere(new Point(2,2,2),3);
@@ -17,7 +18,7 @@ public class SphereTest {
 
     @Test
     void testGetNormal() {
-        assertEquals((new Point(0, 3, 0)).subtract(new Point(2, 2, 2)).normalize(), s.getNormal(new Point(0, 3, 0)));
+        assertEquals((new Vector(-2, 1, -2)).normalize(), s.getNormal(new Point(0, 3, 0)));
     }
 
     @Test

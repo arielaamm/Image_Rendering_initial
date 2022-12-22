@@ -10,10 +10,13 @@ import primitives.Vector;
 
 public class TriangleTest {
 
-    Triangle t = new Triangle(new Point(0, 0, 0),new Point(1, 0, 1),new Point(0, 2, 2));
 
     @Test
-    void testGetNormal() {
-        assertEquals(new Vector(-2.0,-2.0,2.0).normalize(),t.getNormal(new Point(0, 0, 0)));
+    void testGetNormal() {    
+        
+        
+        Triangle t = new Triangle(new Point(-8,3,2),new Point(-4,6,1),new Point(-7,4,-1));
+
+        assertEquals(new Vector(-0.5865,0.8065,0.0733).normalize(),t.getNormal(new Point(-8,3,2)));
     }
 }

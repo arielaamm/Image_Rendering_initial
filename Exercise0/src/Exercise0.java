@@ -1,3 +1,4 @@
+
 abstract class Employee {
     private String firstName;
     private String lastName;
@@ -15,28 +16,25 @@ abstract class Employee {
         setLastName(lastName);
     }
 
-    
-    /** 
+    /**
      * @param firstName
-     * @return 
+     * @return
      */
     private void setFirstName(String firstName) {
         this.firstName = firstName;
     } // set firstName
 
-    
-    /** 
+    /**
      * @param lastName
-     * @return 
+     * @return
      */
     private void setLastName(String lastName) {
         this.lastName = lastName;
     } // set lastName
 
-    
-    /** 
+    /**
      * @param Id
-     * @return 
+     * @return
      */
     private void setId(int Id) {
         if (Id < 0) {
@@ -45,43 +43,38 @@ abstract class Employee {
         this.Id = Id;
     } // set Id
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     private String getFirstName() {
         return firstName;
     } // returns the firstName
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     private String getLastName() {
         return lastName;
     } // returns the lastName
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     private int getId() {
         return Id;
     } // returns the Id
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     @Override
     public String toString() {
         return "first name: " + getFirstName() + ", last name: " + getLastName() + ", ID: " + getId();
     }
 
-    
-    /** 
+    /**
      * @param obj
-     * @return 
+     * @return
      */
     @Override
     public boolean equals(Object obj) {
@@ -250,10 +243,12 @@ class Payroll {
         arr[1] = new CommissionEmployee("qw", "asd", 2, 7000, 12);
         arr[2] = new BasePlusCommissionEmployee("qw", "asd", 1, 7000, 12, 5000);
         for (Employee employee : arr) {
-            if (employee instanceof BasePlusCommissionEmployee)
-                System.out.printf(employee.toString() + ", earnings: %.2f" + "\n", employee.earnings() * 1.10);
-            else
-                System.out.printf(employee.toString() + ", earnings: %.2f" + "\n", employee.earnings());
+        if (employee instanceof BasePlusCommissionEmployee)
+        System.out.printf(employee.toString() + ", earnings: %.2f" + "\n",
+        employee.earnings() * 1.10);
+        else
+        System.out.printf(employee.toString() + ", earnings: %.2f" + "\n",
+        employee.earnings());
         }
     }
 

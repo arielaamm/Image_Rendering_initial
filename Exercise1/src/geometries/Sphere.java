@@ -32,7 +32,7 @@ public class Sphere implements Geometry {
      * @return normal {@link Vector}
      */
     public Vector getNormal(Point p) {
-        return null;
+        return (p.subtract(center)).normalize();
     }
 
     

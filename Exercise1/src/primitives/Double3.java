@@ -1,5 +1,7 @@
 package primitives;
+
 import static primitives.Util.isZero;
+
 public class Double3 {
     final double d1;
     final double d2;
@@ -86,24 +88,29 @@ public class Double3 {
 
     /**
      * Scale (multiply) floating point triad by a number into a new triad where each
-     * number is multiplied by the number
-     * 
+     * number is multiplied by the number and round the result up to 4 numbers after the decimal point
      * @param rhs right handle side operand for scaling
      * @return result of scale
      */
     public Double3 scale(double rhs) {
-        return new Double3(d1 * rhs, d2 * rhs, d3 * rhs);
+        return new Double3(
+                Math.floor(d1 * rhs * 10000) / 10000,
+                Math.floor(d2 * rhs * 10000) / 10000,
+                Math.floor(d3 * rhs * 10000) / 10000);
     }
 
     /**
      * Reduce (divide) floating point triad by a number into a new triad where each
-     * number is divided by the number
+     * number is divided by the number and round the result up to 4 numbers after the decimal point
      * 
      * @param rhs right handle side operand for reducing
      * @return result of scale
      */
     public Double3 reduce(double rhs) {
-        return new Double3(d1 / rhs, d2 / rhs, d3 / rhs);
+        return new Double3(
+            Math.floor((d1 / rhs) * 1000) / 1000,
+            Math.floor((d2 / rhs) * 1000) / 1000,
+            Math.floor((d3 / rhs) * 1000) / 1000);
     }
 
     /**

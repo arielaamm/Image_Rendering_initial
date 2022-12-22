@@ -33,7 +33,11 @@ public class Tube implements Geometry {
      * @return normal {@link Vector} 
      */
     public Vector getNormal(Point p) {
-        return null;
+        return p.subtract(
+            getAxisRay().getP0().add(
+                getAxisRay().getDir().scale(
+                    getAxisRay().getDir().dotProduct(
+                        p.subtract(getAxisRay().getP0()))))).normalize();
     }
 
     

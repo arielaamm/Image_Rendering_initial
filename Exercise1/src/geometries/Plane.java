@@ -1,5 +1,6 @@
 package geometries;
 
+
 import primitives.*;
 
 public class Plane implements Geometry {
@@ -7,7 +8,16 @@ public class Plane implements Geometry {
     private Vector normal;
 
     public Plane(Point point1, Point point2, Point point3) {
-        normal = null;
+        if(point1.equals(point3) || point2.equals(point1) || point2.equals(point3)){
+            throw new IllegalArgumentException("points are coalesce with each other" + point1.toString() + ",  " + point2.toString() + ", " + point3.toString());
+        }
+        if((point2.subtract(point1).crossProduct(point3.subtract(point2)).length() == 0)/*point1.determinant(point1, point2, point3)*/){
+            throw new IllegalArgumentException("points are on the same line" + point1.toString() + ",  " + point2.toString() + ", " + point3.toString());
+        }
+        Vector ab =(point2).subtract(point1);
+        Vector ac = (point3).subtract(point1);
+        normal = ab.crossProduct(ac);
+        normal = normal.normalize();
         q0 = point1;
     }
 
