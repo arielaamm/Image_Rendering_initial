@@ -19,6 +19,14 @@ public class Cylinder extends Tube {
      */
     @Override 
     public Vector getNormal(Point p) {
+        Plane baseA = new Plane(axisRay.getDir(), axisRay.getP0());
+        Plane baseB = new Plane(axisRay.getDir(), axisRay.getP0().add(axisRay.getDir().scale(height)));
+        if (baseA.isOnPlane(p) && p.distance(axisRay.getP0()) <= 3) {
+            return baseA.getNormal().scale(-1);
+        }
+        else if (baseB.isOnPlane(p) && p.distance(axisRay.getP0().add(axisRay.getDir().scale(height))) <= 3) {
+            return baseB.getNormal();
+        }
         return super.getNormal(p);
     }
 

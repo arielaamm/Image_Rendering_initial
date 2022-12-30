@@ -11,26 +11,30 @@ import primitives.Ray;
 import primitives.Vector;
 
 public class TubeTest {
-    Tube t = new Tube(new Ray(new Vector(8, 8, 0), new Point(3, 3, 0)), 3);
+    Vector dir = new Vector(0, 1, 0);
+    Point start = new Point(0, 0, 0);
+    Tube t = new Tube(new Ray(dir, start), 1);
     @Test
     void testGetAxisRay() {
-        assertEquals(new Ray(new Vector(8, 8, 0), new Point(3, 3, 0)),t.getAxisRay());
+        assertEquals((new Ray(dir, start)),t.getAxisRay());
     }
     @Test
     void testGetNormal() {
-        Point pEP = new Point(6, 6, 3);
-        // Point pBVA = new Point(3, 3, 3);
-        // Point p0 = new Point(3, 3, 0);
-        // Vector v = new Vector(8,8,0);
+        Point pointEP = new Point(-1, 2, 0);
+        Point pointBVA = new Point(-1, 0, 0);
+        Vector expectedNormal = new Vector(-1, 0, 0).normalize();
+        Vector actualNormalEP = t.getNormal(pointEP);
+        Vector actualNormalBVA = t.getNormal(pointBVA);
         // ============ Equivalence Partitions Tests ==============
-        assertEquals(new Vector(-381,-381,3).normalize(), t.getNormal(pEP));
+        assertEquals("Unexpected normal: " + actualNormalEP + " expected: " + expectedNormal,
+        actualNormalEP,(expectedNormal));
         // =============== Boundary Values Tests ==================
-        // assertEquals(pBVA.subtract(p0.add(v.scale(v.dotProduct(pBVA.subtract(p0))))).normalize(), t.getNormal(pBVA));
-
+        assertEquals("Unexpected normal: " + actualNormalBVA + " expected: " + expectedNormal,
+        actualNormalBVA,(expectedNormal));
     }
 
     @Test
     void testGetRadius() {
-        assertTrue( t.getRadius() == 3);
+        assertTrue( t.getRadius() == 1);
     }
 }
