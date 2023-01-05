@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
@@ -30,7 +31,11 @@ public class Triangle extends Polygon {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        List<Point> list = super.plane.findIntersections(ray);
+        List<Point> list = new ArrayList<Point>();
+        list = super.plane.findIntersections(ray);
+        if(list == null) {
+            return null;
+        }
         Vector v1 = vertices.get(0).subtract(ray.getP0());
         Vector v2 = vertices.get(1).subtract(ray.getP0());
         Vector v3 = vertices.get(2).subtract(ray.getP0());
