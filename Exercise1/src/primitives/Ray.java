@@ -39,7 +39,10 @@ public class Ray {
     }
 
     
-    
+    public Point getPoint(double t)
+    {
+        return getP0().add(getDir().scale(t));
+    }
     /** 
      * @return 
      */

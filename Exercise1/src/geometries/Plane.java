@@ -1,6 +1,10 @@
 package geometries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import primitives.*;
+import static primitives.Util.*;
 
 public class Plane implements Geometry {
     private Point q0;
@@ -12,10 +16,11 @@ public class Plane implements Geometry {
             throw new IllegalArgumentException("points are coalesce with each other" + point1.toString() + ",  "
                     + point2.toString() + ", " + point3.toString());
         }
-        if ((point2.subtract(point1).crossProduct(point3.subtract(point2)).length() == 0)/*
-                                                                                          * point1.determinant(point1,
-                                                                                          * point2, point3)
-                                                                                          */) {
+        if ((Util.isZero(point2.subtract(point1).crossProduct(point3.subtract(point2)).length()))/*
+                                                                                                  * point1.determinant(
+                                                                                                  * point1,
+                                                                                                  * point2, point3)
+                                                                                                  */) {
             throw new IllegalArgumentException("points are on the same line" + point1.toString() + ",  "
                     + point2.toString() + ", " + point3.toString());
         }
@@ -32,7 +37,7 @@ public class Plane implements Geometry {
         if (p.equals(new Point(0, 0, 0))) {
             d = 0;
         } else {
-            d =  (v.dotProduct(p.subtract(new Point(0, 0, 0))));
+            d = (v.dotProduct(p.subtract(new Point(0, 0, 0))));
         }
     }
 
@@ -59,7 +64,7 @@ public class Plane implements Geometry {
     }
 
     public boolean isOnPlane(Point p) {
-        if (normal.dotProduct(p.subtract(new Point(0, 0, 0))) - d == 0) {
+        if (Util.isZero(normal.dotProduct(p.subtract(new Point(0, 0, 0))) - d)) {
             return true;
         }
         return false;
@@ -71,6 +76,19 @@ public class Plane implements Geometry {
     @Override
     public String toString() {
         return "Plane [q0=" + q0 + ", normal=" + normal + "]";
+    }
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        List<Point> list = new ArrayList<Point>();
+        Vector v = q0.subtract(ray.getP0());
+        double numerator = normal.dotProduct(v);
+        double denominator = normal.dotProduct(ray.getDir());
+        double t = (numerator / denominator);
+        if (!isZero(t) && t > 0) {
+            list.add(ray.getPoint(t));
+        }
+        return list.size() == 0 ? null : list;
     }
 
 }

@@ -1,31 +1,50 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
+import java.util.List;
 
-public class Triangle extends Polygon{
+import primitives.*;
+import static primitives.Util.*;
+
+public class Triangle extends Polygon {
 
     public Triangle(Point point1, Point point2, Point point3) {
         super(point1, point2, point3);
     }
-    
-    /** 
+
+    /**
      * @param p
-     * @return  normal {@link Vector}
+     * @return normal {@link Vector}
      */
     @Override
     public Vector getNormal(Point p) {
         return super.getNormal(p);
     }
 
-    
-    /** 
-     * @return 
+    /**
+     * @return
      */
     @Override
     public String toString() {
         return "Triangle " + super.toString();
     }
-   
-    
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        List<Point> list = super.plane.findIntersections(ray);
+        Vector v1 = vertices.get(0).subtract(ray.getP0());
+        Vector v2 = vertices.get(1).subtract(ray.getP0());
+        Vector v3 = vertices.get(2).subtract(ray.getP0());
+        Vector n1 = v1.crossProduct(v2).normalize();
+        Vector n2 = v2.crossProduct(v3).normalize();
+        Vector n3 = v3.crossProduct(v1).normalize();
+        double dp1 = ray.getDir().dotProduct(n1);
+        double dp2 = ray.getDir().dotProduct(n2);
+        double dp3 = ray.getDir().dotProduct(n3);
+        if (!isZero(dp1) && !isZero(dp2) && !isZero(dp3)) {
+            if (checkSign(dp1, dp2) && checkSign(dp2, dp3) && checkSign(dp3, dp1)) {
+                return list.size() == 0 ? null : list;
+            }
+        }
+        return null;
+    }
 }

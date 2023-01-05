@@ -1,12 +1,14 @@
 package test;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import geometries.Plane;
-import primitives.Point;
-import primitives.Vector;
+import primitives.*;
 
 public class PlaneTest {
     Point p1 = new Point(29,78,2);
@@ -18,10 +20,10 @@ public class PlaneTest {
 
     Point coalesce_p1 =new Point(29,78,2);
     Point sameLine  = new Point(3,3,3);
+    Plane p = new Plane(p1,p2,p3);
 
     @Test
     void testGetNormal() { 
-          Plane p = new Plane(p1,p2,p3);
 
         // ============ Equivalence Partitions Tests ==============
         assertEquals("normal u:" + new Vector(0.0549,0.04909,-0.99728).normalize().length() + " normal code:" + p.getNormal(p1).length(),new Vector(0.0549,0.04909,-0.99728).normalize(), p.getNormal(p1));
@@ -38,6 +40,23 @@ public class PlaneTest {
 
     @Test
     void testGetQ0() {
-        // assertEquals("",p1,p.getQ0());
+        assertEquals(p1,p.getQ0());
+    }
+    @Test
+    void testFindIntersections()
+    {
+        // ============ Equivalence Partitions Tests ==============
+        // TC-EP: Ray to the plane (1 point)
+        Point point = new Point(-6.6043,-10.3456,-4.2641);
+        List<Point> result = p.findIntersections(new Ray(new Vector(2d, -9d, -2.5), new Point(-12, 14, 2.5)));
+        assertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(List.of(point), result, "Ray crosses sphere");
+
+        // =============== Boundary Values Tests ==================
+        // TC-BVA: Ray to the point that creates the plane 
+        point = new Point(4.8324,-77.5499,-6.9449000000000005);
+        result = p.findIntersections(new Ray(new Vector(7.14d, -38.65d, -3.99), new Point(-12, 14, 2.5)));
+        assertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(List.of(point), result, "Ray crosses sphere");
     }
 }

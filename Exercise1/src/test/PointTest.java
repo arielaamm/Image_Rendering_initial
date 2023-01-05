@@ -11,7 +11,7 @@ import primitives.Vector;
 public class PointTest {
     Point p1 = new Point(2,4,5);
     Point p2 = new Point(3.5,4.4,4.5);
-    Vector v1 = new Vector(2,4,5);
+    Vector v1 = new Vector(2d,4d,5d);
     Vector v2 = new Vector(3.5,4.4,4.5);
     /** 
      * @return 
@@ -56,5 +56,4 @@ public class PointTest {
         assertEquals(new Point(1.5, 0.4, -0.5), p2.subtract(v1));
         assertEquals(new Point(-1.5, -0.4, 0.5), p1.subtract(v2));
     }
-
 }

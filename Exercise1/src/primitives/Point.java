@@ -1,5 +1,7 @@
 package primitives;
+
 import static primitives.Util.isZero;
+
 //complied
 public class Point {
     protected final Double3 xyz;
@@ -47,18 +49,18 @@ public class Point {
         return Math.sqrt(distanceSquared(this, p));
     }
 
-    /*בודק האם שלושת הנקודות על אותו ישר בעזרת דטרמיננטה*/
+    /* בודק האם שלושת הנקודות על אותו ישר בעזרת דטרמיננטה */
 
-    public boolean determinant(Point p1,Point p2,Point p3) {
+    public boolean determinant(Point p1, Point p2, Point p3) {
         if (p1 == null || p2 == null || p3 == null) {
             return false;
         }
-        return ((p1.xyz.d1 * p2.xyz.d2 * p3.xyz.d3) -
+        return (Util.isZero((p1.xyz.d1 * p2.xyz.d2 * p3.xyz.d3) -
                 (p1.xyz.d1 * p2.xyz.d3 * p3.xyz.d2) +
                 (p1.xyz.d2 * p2.xyz.d3 * p3.xyz.d1) -
                 (p1.xyz.d2 * p2.xyz.d1 * p3.xyz.d3) +
                 (p1.xyz.d3 * p2.xyz.d1 * p3.xyz.d2) -
-                (p1.xyz.d3 * p2.xyz.d2 * p3.xyz.d1)) == 0;
+                (p1.xyz.d3 * p2.xyz.d2 * p3.xyz.d1)));
 
     }
 
@@ -85,4 +87,15 @@ public class Point {
         return xyz.toString();
     }
 
+    public double getX() {
+        return xyz.d1;
+    }
+
+    public double getY() {
+        return xyz.d2;
+    }
+
+    public double getZ() {
+        return xyz.d3;
+    }
 }

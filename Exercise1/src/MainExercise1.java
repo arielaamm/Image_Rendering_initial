@@ -17,19 +17,19 @@ public final class MainExercise1 {
 	public static void main(String[] args) {
 
 		try { // test zero vector
-			new Vector(0, 0, 0);
+			new Vector(0d, 0d, 0d);
 			out.println("ERROR: zero vector does not throw an exception");
 		} catch (Exception e) {
 		}
 
-		Vector v1 = new Vector(1, 2, 3);
-		Vector v2 = new Vector(-2, -4, -6);
-		Vector v3 = new Vector(0, 3, -2);
+		Vector v1 = new Vector(1d, 2d, 3d);
+		Vector v2 = new Vector(-2d, -4d, -6d);
+		Vector v3 = new Vector(0d, 3d, -2d);
 
 		// test length..
 		if (!isZero(v1.lengthSquared() - 14))
 			out.println("ERROR: lengthSquared() wrong value");
-		if (!isZero(new Vector(0, 3, 4).length() - 5))
+		if (!isZero(new Vector(0d, 3d, 4d).length() - 5))
 			out.println("ERROR: length() wrong value");
 
 		// test Dot-Product
@@ -51,7 +51,7 @@ public final class MainExercise1 {
 			out.println("ERROR: crossProduct() result is not orthogonal to its operands");
 
 		// test vector normalization vs vector length and cross-product
-		Vector v = new Vector(1, 2, 3);
+		Vector v = new Vector(1d, 2d, 3d);
 		Vector u = v.normalize();
 		if (!isZero(u.length() - 1))
 			out.println("ERROR: the normalized vector is not a unit vector");
@@ -65,9 +65,9 @@ public final class MainExercise1 {
 
 		// Test operations with points and vectors
 		Point p1 = new Point(1, 2, 3);
-		if (!(p1.add(new Vector(-1, -2, -3)).equals(new Point(0, 0, 0))))
+		if (!(p1.add(new Vector(-1d, -2d, -3d)).equals(new Point(0, 0, 0))))
 			out.println("ERROR: Point + Vector does not work correctly");
-		if (!new Vector(1, 1, 1).equals(new Point(2, 3, 4).subtract(p1)))
+		if (!new Vector(1d, 1d, 1d).equals(new Point(2, 3, 4).subtract(p1)))
 			out.println("ERROR: Point - Point does not work correctly");
 
 		out.println("If there were no any other outputs - all tests succeeded!");

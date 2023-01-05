@@ -11,7 +11,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 public class TubeTest {
-    Vector dir = new Vector(0, 1, 0);
+    Vector dir = new Vector(0d, 1d, 0d);
     Point start = new Point(0, 0, 0);
     Tube t = new Tube(new Ray(dir, start), 1);
     @Test
@@ -22,7 +22,7 @@ public class TubeTest {
     void testGetNormal() {
         Point pointEP = new Point(-1, 2, 0);
         Point pointBVA = new Point(-1, 0, 0);
-        Vector expectedNormal = new Vector(-1, 0, 0).normalize();
+        Vector expectedNormal = new Vector(-1d, 0d, 0d).normalize();
         Vector actualNormalEP = t.getNormal(pointEP);
         Vector actualNormalBVA = t.getNormal(pointBVA);
         // ============ Equivalence Partitions Tests ==============
@@ -36,5 +36,10 @@ public class TubeTest {
     @Test
     void testGetRadius() {
         assertTrue( t.getRadius() == 1);
+    }
+    @Test
+    void testFindIntersections()
+    {
+
     }
 }
