@@ -10,7 +10,7 @@ public class Vector extends Point {
         }
     }
 
-    public Vector(Double x, Double y, Double z) {
+    public Vector(double x, double y, double z) {
         super(x, y, z);
         if (x == 0 && y == 0 && z == 0) {
             throw new IllegalArgumentException("the vector is the zero vector");
