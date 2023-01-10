@@ -84,6 +84,10 @@ public class Plane implements Geometry {
         Vector v = q0.subtract(ray.getP0());
         double numerator = normal.dotProduct(v);
         double denominator = normal.dotProduct(ray.getDir());
+        if (Math.abs(denominator) <= 0.0009)
+        {
+            return null;
+        }
         double t = (numerator / denominator);
         if (!isZero(t) && t > 0) {
             list.add(ray.getPoint(t));

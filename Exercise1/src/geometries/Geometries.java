@@ -1,28 +1,28 @@
 package geometries;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point;
 import primitives.Ray;
 
-/*LinkedList uses more memory than an ArrayList because it needs to store additional pointers to the next and previous elements in the list soo ArrayList */
+/*LinkedList is more like the structer that we build */
 public class Geometries implements Intersectable {
     public List<Intersectable> intersecList;
 
     public Geometries() {
-        intersecList = new ArrayList<Intersectable>();
+        intersecList = new LinkedList<Intersectable>();
     }
 
     public Geometries(Intersectable... geometries) {
-        intersecList = new ArrayList<Intersectable>();
+        intersecList = new LinkedList<Intersectable>();
         for (Intersectable geometrie : geometries) {
             intersecList.add(geometrie);
         }
     }
 
     public void add(Intersectable... geometries) {
-        intersecList = new ArrayList<Intersectable>();
+        intersecList = new LinkedList<Intersectable>();
         for (Intersectable geometrie : geometries) {
             intersecList.add(geometrie);
         }
@@ -30,8 +30,8 @@ public class Geometries implements Intersectable {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        List<Point> list = new ArrayList<Point>();
-        List<Point> Templist = new ArrayList<Point>();
+        List<Point> list = new LinkedList<Point>();
+        List<Point> Templist = new LinkedList<Point>();
         for (Intersectable intersectable : intersecList) {
             Templist = intersectable.findIntersections(ray);
             if (Templist != null) {
