@@ -57,10 +57,13 @@ public class Vector extends Point {
         return new Vector(xyz.reduce(length()));
     }
 
+    // get point or vector and because vector is the san of the point 
+    // it doesnt matter if it covert to point rather than vector because the action is the same.
     /**
      * @return dot product
      */
-    public double dotProduct(Vector v) {
+    public double dotProduct(Object obj) {
+        Point v = (Point)obj;
         return xyz.product(v.xyz).d1 + xyz.product(v.xyz).d2 + xyz.product(v.xyz).d3;
     }
 

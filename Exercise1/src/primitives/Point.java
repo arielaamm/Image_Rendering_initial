@@ -2,8 +2,8 @@ package primitives;
 
 import static primitives.Util.isZero;
 
-//complied
 public class Point {
+    public static final Point ZERO = new Point(Double3.ZERO);
     protected final Double3 xyz;
 
     public Point(double x, double y, double z) {
@@ -26,8 +26,8 @@ public class Point {
      * @param p
      * @return subtract {@link Point}
      */
-    public Vector subtract(Point p) {
-        return new Vector(this.xyz.subtract(p.xyz));
+    public Vector subtract(Object p) {
+        return new Vector(this.xyz.subtract(((Point)p).xyz));
     }
 
     /**
@@ -87,6 +87,13 @@ public class Point {
         return xyz.toString();
     }
 
+    public boolean isLessThan(Point point) {
+        return this.distance(new Point(Double3.ZERO)) < point.distance(new Point(Double3.ZERO));
+    }
+
+/* only of the testing 
+ * teacher order
+ */
     public double getX() {
         return xyz.d1;
     }

@@ -1,4 +1,4 @@
-package test;
+package test.geometriesTests;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;

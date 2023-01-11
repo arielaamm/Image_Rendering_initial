@@ -37,7 +37,7 @@ public class Plane implements Geometry {
         if (p.equals(new Point(0, 0, 0))) {
             d = 0;
         } else {
-            d = (v.dotProduct(p.subtract(new Point(0, 0, 0))));
+            d = (v.dotProduct(p));
         }
     }
 
@@ -64,7 +64,7 @@ public class Plane implements Geometry {
     }
 
     public boolean isOnPlane(Point p) {
-        if (Util.isZero(normal.dotProduct(p.subtract(new Point(0, 0, 0))) - d)) {
+        if (Util.isZero(normal.dotProduct(p) - d)) {
             return true;
         }
         return false;
