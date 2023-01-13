@@ -1,10 +1,6 @@
 package test.rendererTests;
 
-import java.io.File;
-import java.io.IOException;
 import static xml.XmlTool.xmlHendler;
-import javax.xml.parsers.*;
-import org.xml.sax.SAXException;
 import org.junit.jupiter.api.Test;
 import lighting.AmbientLight;
 import geometries.*;
@@ -51,32 +47,23 @@ public class RenderTests {
 		camera.writeToImage();
 	}
 
-	
-
 	/**
 	 * Test for XML based scene - for bonus
 	 */
 	@Test
 	public void basicRenderXml() {
 		Scene scene = new Scene("XML Test scene");
-		File xmlFile = new File(
-				"C:\\Users\\arial\\Java\\ISE5782_2845_5562\\Exercise1\\XML\\basicRenderTestTwoColors.xml");
-		try {
-			scene = xmlHendler(scene, xmlFile);
-			// enter XML file name and parse from XML file into scene object
-			// ...
+		scene = xmlHendler(scene,"C:\\Users\\arial\\Java\\ISE5782_2845_5562\\Exercise1\\XML\\basicRenderTestTwoColors.xml");
 
-			Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-					.setViewPlaneDistance(100) //
-					.setViewPlaneSize(500, 500)
-					.setImageWriter(new ImageWriter("xml render test", 1000, 1000))
-					.setRayTracer(new RayTracerBasic(scene));
-			camera.renderImage();
-			camera.printGrid(100, new Color(java.awt.Color.YELLOW));
-			camera.writeToImage();
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
-		}
+		Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setViewPlaneDistance(100) //
+				.setViewPlaneSize(500, 500)
+				.setImageWriter(new ImageWriter("xml render test", 1000, 1000))
+				.setRayTracer(new RayTracerBasic(scene));
+		camera.renderImage();
+		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
+		camera.writeToImage();
+
 	}
 
 }
