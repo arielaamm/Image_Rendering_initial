@@ -19,14 +19,13 @@ public class Cylinder extends Tube {
      * @param p
      * @return normal {@link Vector}.
      */
-    @Override 
+    @Override
     public Vector getNormal(Point p) {
         Plane baseA = new Plane(axisRay.getDir(), axisRay.getP0());
         Plane baseB = new Plane(axisRay.getDir(), axisRay.getP0().add(axisRay.getDir().scale(height)));
         if (baseA.isOnPlane(p) && p.distance(axisRay.getP0()) <= 3) {
             return baseA.getNormal().scale(-1);
-        }
-        else if (baseB.isOnPlane(p) && p.distance(axisRay.getP0().add(axisRay.getDir().scale(height))) <= 3) {
+        } else if (baseB.isOnPlane(p) && p.distance(axisRay.getP0().add(axisRay.getDir().scale(height))) <= 3) {
             return baseB.getNormal();
         }
         return super.getNormal(p);
@@ -39,6 +38,12 @@ public class Cylinder extends Tube {
         return height;
     }
 
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /**
      * @return
      */
@@ -46,8 +51,5 @@ public class Cylinder extends Tube {
     public String toString() {
         return "Cylinder [height=" + height + "] " + super.toString();
     }
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-        return null;
-    }
+
 }

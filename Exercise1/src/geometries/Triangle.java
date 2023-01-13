@@ -30,10 +30,11 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> list = new ArrayList<Point>();
-        list = super.plane.findIntersections(ray);
-        if(list == null) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<Point> temp = new ArrayList<Point>();
+        List<GeoPoint> list = new ArrayList<GeoPoint>();
+        temp = super.plane.findIntersections(ray);
+        if(temp == null) {
             return null;
         }
         Vector v1 = vertices.get(0).subtract(ray.getP0());
@@ -47,6 +48,7 @@ public class Triangle extends Polygon {
         double dp3 = ray.getDir().dotProduct(n3);
         if (!isZero(dp1) && !isZero(dp2) && !isZero(dp3)) {
             if (checkSign(dp1, dp2) && checkSign(dp2, dp3) && checkSign(dp3, dp1)) {
+                temp.forEach(i->list.add(new GeoPoint(this, i)));
                 return list.size() == 0 ? null : list;
             }
         }

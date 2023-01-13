@@ -6,7 +6,7 @@ import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     private Point q0;
     private Vector normal;
     private double d; // d - the d parm in plane equation
@@ -79,8 +79,8 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> list = new ArrayList<Point>();
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> list = new ArrayList<GeoPoint>();
         Vector v = q0.subtract(ray.getP0());
         double numerator = normal.dotProduct(v);
         double denominator = normal.dotProduct(ray.getDir());
@@ -90,7 +90,7 @@ public class Plane implements Geometry {
         }
         double t = (numerator / denominator);
         if (!isZero(t) && t > 0) {
-            list.add(ray.getPoint(t));
+            list.add(new GeoPoint(this,ray.getPoint(t)));
         }
         return list.size() == 0 ? null : list;
     }

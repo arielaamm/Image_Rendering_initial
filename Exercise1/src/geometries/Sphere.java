@@ -6,7 +6,7 @@ import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
 
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
     private Point center;
     private double radius;
 
@@ -46,13 +46,13 @@ public class Sphere implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         if (ray == null) {
             return null;
         }
-        List<Point> list = new ArrayList<Point>();
+        List<GeoPoint> list = new ArrayList<GeoPoint>();
         if (ray.getP0().equals(center)) {
-            list.add(ray.getPoint(radius));
+            list.add(new GeoPoint(this,ray.getPoint(radius)));
             return list;
         }
         Vector u = center.subtract(ray.getP0());
@@ -64,10 +64,10 @@ public class Sphere implements Geometry {
         double th = Math.sqrt((radius * radius) - (d * d));
         if (!isZero(th + tm)) {
             if (tm + th > 0) {
-                list.add(ray.getPoint(tm + th));
+                list.add(new GeoPoint(this,ray.getPoint(tm + th)));
             }
             if (tm - th > 0) {
-                list.add(ray.getPoint(tm - th));
+                list.add(new GeoPoint(this,ray.getPoint(tm - th)));
             }
         }
         return list.size() == 0 ? null : list;
