@@ -40,7 +40,7 @@ public class Scene {
 
     
     /** 
-     * @param geometries
+     * @param geometries   
      * @return this {@link Scene} instance
      */
     public Scene setGeometries(Geometries geometries) {
