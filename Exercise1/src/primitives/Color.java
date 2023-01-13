@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.Arrays;
+
 /**
  * Wrapper class for java.jwt.Color The constructors operate with any
  * non-negative RGB values. The colors are maintained without upper limit of
@@ -146,4 +148,9 @@ public class Color {
 	public String toString() {
 		return "rgb:" + rgb;
 	}
+
+    public static Color cast(String nodeValue) {
+        int[] intArray = Arrays.stream(nodeValue.split(" ")).mapToInt(Integer::parseInt).toArray();
+		return new Color(intArray[0], intArray[1], intArray[2]);
+    }
 }

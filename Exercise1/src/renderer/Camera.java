@@ -62,15 +62,15 @@ public class Camera {
         } else if (this.rayTracerBase == null) {
             throw new MissingResourceException("the rayTracerBase is null", "RayTracerBase", null);
         }
-        for (int i = 0; i < imageWriter.getNx(); i++) {
-            for (int j = 0; j < imageWriter.getNy(); j++) {
-                imageWriter.writePixel(i, j,castRay(((int)width),((int)height),i,j));
+        for (int i = 0; i < imageWriter.getNy(); i++) {
+            for (int j = 0; j < imageWriter.getNx(); j++) {
+                imageWriter.writePixel(i, j,castRay((imageWriter.getNx()),(imageWriter.getNy()),i,j));
             }
         }
     }
 
     public Color castRay(int nX, int nY, int i, int j){
-        return rayTracerBase.traceRay(constructRay(((int)width),((int)height),i,j));
+        return rayTracerBase.traceRay(constructRay(nX,nY,i,j));
     }
 
     /**
@@ -98,13 +98,12 @@ public class Camera {
     }
 
     public void printGrid(int interval, Color color) {
-        int amount = ((int) Math.abs(interval));
         if (imageWriter != null) {
-            for (int i = 0; i < imageWriter.getNx(); i++) {
-                for (int j = 0; j < imageWriter.getNy(); j++) {
-                    if (i % amount == 0) {
+            for (int i = 0; i < imageWriter.getNy(); i++) {
+                for (int j = 0; j < imageWriter.getNx(); j++) {
+                    if (i % interval == 0) {
                         imageWriter.writePixel(i, j, color);
-                    } else if (j % amount == 0) {
+                    } if (j % interval == 0) {
                         imageWriter.writePixel(i, j, color);
                     }
                 }
