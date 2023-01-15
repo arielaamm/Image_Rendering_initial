@@ -56,21 +56,25 @@ public class Camera {
         return this;
     }
 
-    public void renderImage() {
+    public Camera renderImage() {
         if (this.imageWriter == null) {
             throw new MissingResourceException("the imageWriter is null", "ImageWriter", null);
         } else if (this.rayTracerBase == null) {
             throw new MissingResourceException("the rayTracerBase is null", "RayTracerBase", null);
         }
-        for (int i = 0; i < imageWriter.getNy(); i++) {
-            for (int j = 0; j < imageWriter.getNx(); j++) {
-                imageWriter.writePixel(i, j,castRay((imageWriter.getNx()),(imageWriter.getNy()),i,j));
+        int ny = imageWriter.getNy();
+        int nx = imageWriter.getNx();
+        for (int i = 0; i < ny; i++) {
+            for (int j = 0; j < nx; j++) {
+                Color pixelColor = castRay(nx, ny, j, i);
+                this.imageWriter.writePixel(j, i, pixelColor);
             }
         }
+        return this;
     }
 
-    public Color castRay(int nX, int nY, int i, int j){
-        return rayTracerBase.traceRay(constructRay(nX,nY,i,j));
+    public Color castRay(int nX, int nY, int j, int i){
+        return rayTracerBase.traceRay(constructRay(nX,nY,j,i));
     }
 
     /**

@@ -65,16 +65,25 @@ public class Ray {
         return p0.toString() + ", " + dir.toString();
     }
 
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> list) {
-        if (list == null || list.size() == 0) {
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPointList) {
+
+        if (geoPointList == null) {
             return null;
         }
-        GeoPoint closest = list.get(0);
-        for (GeoPoint point : list) {
-            if (!closest.isLessThan(closest, point)) {
-                closest = point;
+
+        GeoPoint closestPoint = null;
+        double minDistance = Double.MAX_VALUE;
+        double geoPointDistance; // the distance between the "this.p0" to each point in the list
+
+        if (!geoPointList.isEmpty()) {
+            for (var geoPoint : geoPointList) {
+                geoPointDistance = this.p0.distance(geoPoint.point);
+                if (geoPointDistance < minDistance) {
+                    minDistance = geoPointDistance;
+                    closestPoint = geoPoint;
+                }
             }
         }
-        return closest;
+        return closestPoint;
     }
 }

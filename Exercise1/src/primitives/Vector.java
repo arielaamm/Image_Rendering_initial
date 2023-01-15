@@ -63,8 +63,13 @@ public class Vector extends Point {
      * @return dot product
      */
     public double dotProduct(Object obj) {
-        Point v = (Point)obj;
-        return xyz.product(v.xyz).d1 + xyz.product(v.xyz).d2 + xyz.product(v.xyz).d3;
+        if (obj instanceof Vector || obj instanceof Point){
+            Point v = (Point)obj;
+            return xyz.product(v.xyz).d1 + xyz.product(v.xyz).d2 + xyz.product(v.xyz).d3;
+        }
+        else{
+            throw new IllegalArgumentException("Invalid object");
+        }
     }
 
     public Vector crossProduct(Vector v) {
